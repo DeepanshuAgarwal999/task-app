@@ -1,18 +1,19 @@
-import React, { useReducer } from 'react'
 import Modal from './components/ui/Modal'
-import { useTaskContext } from './context/TaskContext'
 import TaskList from './components/TaskList'
 import TaskForm from './components/TaskForm'
 
+
 const App = () => {
-  const { state, dispatch } = useTaskContext()
   return (
-    <div className='
-    '>
-      <h1>
+    <div className='container'>
+      <div className='flex flex-col gap-4'>
+        <h1 className='mt-10 text-center font-bold text-4xl'>Task App</h1>
         <TaskList />
-        <Modal><TaskForm /></Modal>
-      </h1>
+        <Modal title="Add Task">
+          {(closeModal) => <TaskForm closeModal={closeModal} />}
+        </Modal>
+      </div>
+
     </div>
   )
 }
