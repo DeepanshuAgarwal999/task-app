@@ -1,4 +1,4 @@
-const initialState: Tasks = {}
+const initialState: Tasks = {};
 
 const taskReducer = (state = initialState, action: TaskAction) => {
   switch (action.type) {
@@ -23,6 +23,18 @@ const taskReducer = (state = initialState, action: TaskAction) => {
 
     case "DELETE_TASK":
       const newState = { ...state };
+      if (action.payload.parentId) {
+        const parentTask = newState[action.payload.parentId];
+        if (parentTask) {
+          const newTasks = parentTask.tasks.filter(
+            (id) => id !== action.payload.id
+          );
+          newState[action.payload.parentId] = {
+            ...parentTask,
+            tasks: newTasks,
+          };
+        }
+      }
       delete newState[action.payload.id];
       return newState;
 

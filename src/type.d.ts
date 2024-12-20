@@ -2,6 +2,7 @@ type Task = {
   id: number;
   title: string;
   done: boolean;
+  parentId?: number | null;
   description: string;
   createdAt: Date;
   tasks: number[];

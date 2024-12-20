@@ -1,15 +1,16 @@
 import React from 'react'
 import { useTaskContext } from '../context/TaskContext'
+import TaskElement from './TaskElement'
 
 const TaskList = () => {
     const { state } = useTaskContext()
     const tasks = Object.values(state)
-    console.log(tasks)
+    const rootTasks = tasks.filter((task) => !task.parentId).map((task) => task)
     return (
-        <div>
+        <div className='space-y-4 mt-10'>
             {
-                tasks.map((task, index) => {
-                    return <div key={index}>{task.title}</div>
+                rootTasks.map((task, index) => {
+                    return <TaskElement task={task} key={index} />
                 })
             }
         </div>
