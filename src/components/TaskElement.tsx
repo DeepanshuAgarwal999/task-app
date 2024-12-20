@@ -4,7 +4,7 @@ import TaskForm from './TaskForm'
 import { useTaskContext } from '../context/TaskContext'
 
 const TaskElement = ({ task }: { task: Task }) => {
-  console.log(task)
+  // console.log(task)
   const { state, dispatch } = useTaskContext()
 
   const handleDelete = useCallback(() => {
@@ -34,6 +34,7 @@ const TaskElement = ({ task }: { task: Task }) => {
       </div>
 
       <div className='flex items-center gap-4 text-white'>
+        <input type='checkbox' checked={task.done} onChange={() => dispatch({ type: 'TOGGLE_TASK', payload: { id: task.id } })} className='mr-4' />
         <Modal title='add subtask'>{(closeModal) => <TaskForm parentId={task.id} closeModal={closeModal} />}</Modal>
         <Modal title='Edit Task'>{(closeModal) => <TaskForm taskId={task.id} closeModal={closeModal} />}</Modal>
         <button className='bg-red-500 rounded-md p-2' onClick={handleDelete}>Delete</button>
